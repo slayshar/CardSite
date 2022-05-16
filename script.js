@@ -22,10 +22,14 @@ const validationForm = new FormValidator(
   popupInputForm,
   cardSubmitBtn
 );
+editForm.open();
+popupForm.open();
 
 closeBigImg.setEventListeners();
 validationForm.setEventListeners();
 createErrors.setEventListeners();
+editSubmitBtn.addEventListener(`click`, loadNameAndJob);
+cardSubmitBtn.addEventListener(`click`, loadCard);
 
 const initCards = () => {
   const cardArray = [];
@@ -41,29 +45,3 @@ const initCards = () => {
   readyCard.render();
 };
 initCards();
-
-const everythingAboutForms = () => {
-  const openAndCloseForms = () => {
-    editForm.open();
-    popupForm.open();
-  };
-  openAndCloseForms();
-
-  const resultForms = () => {
-    editSubmitBtn.addEventListener(`click`, (event) => {
-      event.preventDefault();
-      loadName.updateUserInfo();
-      editForm.enter();
-    });
-
-    cardSubmitBtn.addEventListener(`click`, (event) => {
-      event.preventDefault();
-      const userCardInstance = new Card(cardName.value, cardUrl.value);
-      const userCardNode = userCardInstance.render();
-      place.prepend(userCardNode);
-      popupForm.enter();
-    });
-  };
-  resultForms();
-};
-everythingAboutForms();
