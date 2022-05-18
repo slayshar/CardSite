@@ -27,45 +27,49 @@ class Errors {
   get cardlinkerror() {
     return this.cardform.querySelector(`.linkError`);
   }
-
+  changeError(selector, error) {
+    selector.textContent = error;
+  }
   nameErrors = () => {
-    if (this.editname.validity.valueMissing) {
-      this.editnameerror.textContent = `Это обязательное поле`;
-    } else if (
-      this.editname.validity.tooShort ||
-      this.editname.validity.tooLong
-    ) {
-      this.editnameerror.textContent = `Должно быть от 2 до 30 символов`;
+    const nameValueMissing = this.editname.validity.valueMissing;
+    const nameTooShort = this.editname.validity.tooShort;
+    const nameTooLong = this.editname.validity.tooLong;
+    const jobValueMissing = this.editjob.validity.valueMissing;
+    const jobTooShort = this.editjob.validity.tooShort;
+    const jobTooLong = this.editjob.validity.tooLong;
+
+    if (nameValueMissing) {
+      this.changeError(this.editnameerror, textErrors.empty);
+    } else if (nameTooShort || nameTooLong) {
+      this.changeError(this.editnameerror, textErrors.length);
     } else {
-      this.editnameerror.textContent = ``;
+      this.changeError(this.editnameerror, textErrors.valid);
     }
-    if (this.editjob.validity.valueMissing) {
-      this.editjoberror.textContent = `Это обязательное поле`;
-    } else if (
-      this.editjob.validity.tooShort ||
-      this.editjob.validity.tooLong
-    ) {
-      this.editjoberror.textContent = `Должно быть от 2 до 30 символов`;
+    if (jobValueMissing) {
+      this.changeError(this.editjoberror, textErrors.empty);
+    } else if (jobTooShort || jobTooLong) {
+      this.changeError(this.editjoberror, textErrors.length);
     } else {
-      this.editjoberror.textContent = ``;
+      this.changeError(this.editjoberror, textErrors.valid);
     }
   };
 
   cardErrors = () => {
-    if (this.cardname.validity.valueMissing) {
-      this.cardnameerror.textContent = `Это обязательное поле`;
-    } else if (
-      this.cardname.validity.tooShort ||
-      this.cardname.validity.tooLong
-    ) {
-      this.cardnameerror.textContent = `Должно быть от 2 до 30 символов`;
+    const cardNameValueMissing = this.cardname.validity.valueMissing;
+    const cardNameTooShort = this.cardname.validity.tooShort;
+    const cardNameTooLong = this.cardname.validity.tooLong;
+    const cardLinkIsNotALink = this.cardlink.validity.typeMismatch;
+    if (cardNameValueMissing) {
+      this.changeError(this.cardnameerror, textErrors.empty);
+    } else if (cardNameTooShort || cardNameTooLong) {
+      this.changeError(this.cardnameerror, textErrors.length);
     } else {
-      this.cardnameerror.textContent = ``;
+      this.changeError(this.cardnameerror, textErrors.valid);
     }
-    if (this.cardlink.validity.typeMismatch) {
-      this.cardlinkerror.textContent = `Здесь должна быть ссылка`;
+    if (cardLinkIsNotALink) {
+      this.changeError(this.cardlinkerror, textErrors.link);
     } else {
-      this.cardlinkerror.textContent = ``;
+      this.changeError(this.cardlinkerror, textErrors.valid);
     }
   };
 

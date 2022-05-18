@@ -11,10 +11,10 @@ const cardSubmitBtn = document.querySelector(`.popup__button`);
 const cardUrl = document.querySelector(`.popup__input_type_link-url`);
 const cardName = document.querySelector(`.popup__input_type_name`);
 
-const loadName = new UserInfo(editWindow);
+const loadNameAndJob = new UserInfo(editWindow);
 const editForm = new Popup(editWindow, editBtn);
 const popupForm = new Popup(cardWindow, mainPopupBtn);
-const closeBigImg = new ImgPopup();
+const openAndCloseBigImg = new ImgPopup();
 const createErrors = new Errors(editInputForm, popupInputForm);
 const validationForm = new FormValidator(
   editInputForm,
@@ -22,14 +22,13 @@ const validationForm = new FormValidator(
   popupInputForm,
   cardSubmitBtn
 );
-editForm.open();
-popupForm.open();
-
-closeBigImg.setEventListeners();
+openAndCloseBigImg.setEventListeners();
 validationForm.setEventListeners();
 createErrors.setEventListeners();
-editSubmitBtn.addEventListener(`click`, loadNameAndJob);
+editSubmitBtn.addEventListener(`click`, updateNameAndJob);
 cardSubmitBtn.addEventListener(`click`, loadCard);
+editBtn.addEventListener(`click`, editForm.open);
+mainPopupBtn.addEventListener(`click`, popupForm.open);
 
 const initCards = () => {
   const cardArray = [];

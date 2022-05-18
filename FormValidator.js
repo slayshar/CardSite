@@ -19,7 +19,9 @@ class FormValidator {
       .length;
   }
   validateEditForm = () => {
-    if (this.editNameLength > 1 && this.editJobLength > 1) {
+    const nameIsValid = this.editNameLength > 1;
+    const jobIsValid = this.editJobLength > 1;
+    if (nameIsValid && jobIsValid) {
       this.editbtn.classList.add(`button__active`);
       this.editbtn.classList.remove(`button__deactive`);
       this.editbtn.removeAttribute('disabled');
